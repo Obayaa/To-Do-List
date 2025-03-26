@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="todo-container">
+        <h2>TODO List</h2>
+        <div class="input-container">
+            <input type="text" id="taskInput" placeholder="Add a new Item">
+            <button onclick="AddTask()">Add</button>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        let todoItems = [];
+
+        function AddTask(){
+            let inputElement = document.getElementById("taskInput");
+            let inputValue = inputElement.value.trim();
+
+            if (inputValue === ""){
+                alert("Please add an item");
+                return;
+            }
+
+            let task = {
+                id: Date.now(),
+                text: inputValue,
+                completed: false
+            };
+
+            todoItems.push(task);
+            let list = document.createElement("li");
+            list.className = "todo-item";
+            list.dataset.id = task.id;
+            list.innerHTML = `
+                <div class="todo-item-content">
+                    <input type="checkbox" onclick="ToggleTask(this)">
+                    <span>${inputValue}</span>
+                </div>
+                <button class="delete-btn" onclick="DeleteTask(this)">Delete</button>
+            `;
+
+            document.getElementById("taskList").appendChild(list);
+
+            inputElement.value = "";
+        }
+
+        function ToggleTask(checkbox){
+            let listItem = checkbox.closest('.todo-item');
+            let taskId = parseInt(listItem.dataset.id);
+
+            let taskIndex = todoItems.findIndex(task => task.id === taskId);
+            if (taskIndex !== -1){
+                todoItems[taskIndex].completed = checkbox.checked;
+
+                if (checkbox.checked) {
+                    listItem.classList.add('completed');
+                } else {
+                    listItem.classList.remove('completed');
+                }
+            }
+        }
+
+        function DeleteTask(button){
+            let list = button.parentElement;
+            let taskId = parseInt(list.dataset.id);
+
+            let taskList = document.getElementById("taskList"); 
+            taskList.removeChild(list);
+
+            todoItems = todoItems.filter(task => task.id !== taskId);
+        }
+    </script>
+</body>
+</html>
