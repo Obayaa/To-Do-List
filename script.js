@@ -69,10 +69,14 @@ function DeleteTask(button) {
     let list = button.parentElement;
     let taskId = parseInt(list.dataset.id);
 
-    let taskList = document.getElementById("taskList");
-    taskList.removeChild(list);
+    let confirmation = confirm('Are you sure you want to delete this task?');
+    if(confirmation){
+        let taskList = document.getElementById("taskList");
+        taskList.removeChild(list);
+        todoItems = todoItems.filter(task => task.id !== taskId);
+        console.log(todoItems);
+    }
 
-    todoItems = todoItems.filter(task => task.id !== taskId);
 
-    console.log(todoItems);
+
 }
