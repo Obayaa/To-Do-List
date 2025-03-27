@@ -21,7 +21,7 @@ A more complex implementation with:
 
 ## How to Test the Second Approach
 
-To switch to the second approach:
+To switch to the other approach, DO VICE VERSA OF THE APPROACH BELOW:
 
 1. In `index.html`:
    - Comment out the current `onclick` button:
@@ -47,6 +47,7 @@ To switch to the second approach:
    ```
 
 4. These changes will load the more advanced implementation from `script.js`
+
 
 ## Key Differences
 
