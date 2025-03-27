@@ -43,8 +43,8 @@ function AddTask() {
             `;
 
     document.getElementById("taskList").appendChild(list);
-
     inputElement.value = "";
+    // alert(`${inputValue} added successfully.`);
 }
 
 function ToggleTask(checkbox) {
